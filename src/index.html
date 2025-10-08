@@ -1,121 +1,210 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mortgage Calculator</title>
-  <link rel="stylesheet" href="./output.css">
-</head>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mortgage Calculator</title>
+    <link rel="stylesheet" href="./output.css" />
+    <style>
+      .Result {
+        display: none;
+      }
+    </style>
+  </head>
 
-<style>
-  .Result{
-    display: none;
-  }
-</style>
-<body class="flex justify-center items-center  overflow-hidden shadow-lg min-h-screen">
+  <body
+    class="flex justify-center items-center overflow-hidden shadow-lg min-h-screen bg-gray-50 px-2"
+  >
+    <div
+      class="flex flex-col md:flex-row rounded-2xl bg-stone shadow-lg overflow-hidden w-full max-w-4xl mx-auto"
+    >
+      <!-- LEFT: Calculator -->
+      <div class="bg-stone-100 w-full md:w-1/2">
+        <div
+          class="bg-stone-100 p-4 md:p-6 rounded-xl md:rounded-tr-none md:rounded-br-none hover:shadow-lg w-full"
+        >
+          <div class="flex justify-between items-center mb-4">
+            <h2 class="text-base md:text-lg font-semibold text-gray-800">
+              Mortgage Calculator
+            </h2>
+            <a
+              href="#"
+              id="clearAll"
+              onclick="Clear()"
+              class="text-sm text-blue-600 underline"
+              >Clear All</a
+            >
+          </div>
 
-  <div class="flex rounded-2xl  bg-stone shadow-lg overflow-hidden">
-    <!-- LEFT: Calculator -->
-    <div class=" bg-stone-100 w-[350px]">
+          <!-- Mortgage Amount -->
+          <div class="flex flex-col gap-0">
+            <label class="block text-gray-700 font-medium mb-1"
+              >Mortgage Amount</label
+            >
+            <div class="flex gap-0 items-center">
+              <span
+                id="just1"
+                class="flex items-center px-3 py-2 border rounded-r-none rounded-lg mb-3 border-r-0 border-gray-300 text-gray-600 bg-teal-200"
+                >£</span
+              >
+              <input
+                onkeypress="press1()"
+                id="Mortgage_Amount"
+                type="text"
+                placeholder="300,000"
+                class="w-full px-3 py-2 outline-gray-400 mb-3 border border-l-0 rounded-l-none border-gray-300 rounded-lg"
+              />
+            </div>
+            <p id="e0" class="mb-4 text-red-500 text-sm"></p>
+          </div>
 
-    <div class="bg-stone-100 p-6 rounded-xl rounded-tr-[0px] rounded-br-[0px] hover: shadow-lg w-[350px]">
-    <div class="flex justify-between items-center mb-4">
-      <h2 class="text-lg font-semibold text-gray-800">Mortgage Calculator</h2>
-      <a href="#" id="clearAll" onclick="Clear()" class="text-sm text-blue-600 underline">Clear All</a>
-    </div>
+          <!-- Term & Interest -->
+          <div class="flex flex-col md:flex-row justify-between items-center mb-4 gap-3">
+            <div class="flex flex-col items-start w-full md:w-1/2">
+              <!-- Mortgage Term -->
+              <label class="block text-gray-700 font-medium mb-1"
+                >Mortgage Term</label
+              >
+              <div class="flex gap-0 mb-3">
+                <input
+                  type="text"
+                  placeholder="25"
+                  id="Mortgage_Term"
+                  onkeypress="press2()"
+                  class="w-20 md:w-[4vw] px-3 py-2 border border-gray-400 outline-gray-400 rounded-lg border-r-0 outline-r-0 rounded-r-none"
+                />
+                <span
+                  id="just2"
+                  class="flex items-center px-3 py-2 border border-l-0 rounded-l-none border-gray-400 rounded-lg text-gray-600 bg-teal-100"
+                  >years</span
+                >
+              </div>
+              <p id="e1" class="text-red-500 text-sm"></p>
+            </div>
 
-    <!-- Mortgage Amount -->
-  <div  class="flex flex-col gap-[0px]">   
-    <label class="block text-gray-700 font-medium mb-1">Mortgage Amount</label>
-    <div  class="flex gap-0  items-center">
-      <span id="just1" class="flex items-center px-3 py-2 border rounded-r-[0px] rounded-[8px] mb-[12px] p-[3px] outline-gray-400  outline-l-[0px]   border-r-0  border-gray-300  text-gray-600 bg-teal-200">£</span> 
-      <input onkeypress="press1()" id="Mortgage_Amount" type="text" placeholder=" 300,000"
-      class="w-full px-3 py-2 outline-gray-400  outline-l-[0px] mb-3 border border-l-[0px] rounded-l-[0px] border-gray-300 rounded-lg">
-    </div>
-    <p id="e0"  class="mb-[30px]"></p>
-  </div>
-    <div  class="flex justify-between items-center mb-4 gap-3">
+            <div class="flex flex-col items-start w-full md:w-1/2">
+              <!-- Interest Rate -->
+              <label class="block text-gray-700 font-medium mb-1"
+                >Interest Rate</label
+              >
+              <div class="flex gap-0 mb-3 items-end">
+                <input
+                  type="text"
+                  placeholder="5.25"
+                  id="Interest_rate"
+                  onkeypress="press3()"
+                  class="w-24 md:w-[10vw] px-3 py-2 border border-gray-400 outline-gray-400 border-r-0 rounded-r-none rounded-lg"
+                />
+                <span
+                  id="just3"
+                  class="flex items-center border-l-0 rounded-l-none px-3 py-2 border border-gray-400 rounded-lg text-gray-600 bg-teal-100"
+                  >%</span
+                >
+              </div>
+              <p id="e2" class="text-red-500 text-sm"></p>
+            </div>
+          </div>
 
-    <div class="flex flex-col items-start w-1/2">
-    <!-- Mortgage Term -->
-    <label class="block text-gray-700 font-medium mb-1">Mortgage Term</label>
-    <div class="flex gap-0 mb-3">
-      <input type="text" placeholder="25" id="Mortgage_Term"  onkeypress="press2()"
-        class="w-[4vw] px-3 py-2 border border-gray-400  outline-gray-400  rounded-lg  border-r-0 outline-r-0 rounded-r-none">
-      <span id="just2" class="flex items-center px-3 py-2 border  border-l-0  rounded-l-none border-gray-400 rounded-lg text-gray-600 bg-teal-100">years</span>
-    </div>
-    <p id="e1"></p>
-    </div>
+          <!-- Mortgage Type -->
+          <label class="block text-gray-700 font-medium mb-2"
+            >Mortgage Type</label
+          >
+          <div class="space-y-2">
+            <label
+              class="flex items-center gap-2 p-3 border border-gray-300 rounded-lg cursor-pointer hover:border-amber-300 hover:bg-amber-100"
+            >
+              <input
+                type="radio"
+                name="mortgage-type"
+                aria-checked="true"
+                class="accent-amber-600"
+              />
+              <span class="text-gray-700">Repayment</span>
+            </label>
+            <label
+              class="flex items-center gap-2 p-3 border border-gray-300 rounded-lg cursor-pointer hover:border-amber-300 hover:bg-amber-100"
+            >
+              <input
+                type="radio"
+                name="mortgage-type"
+                aria-checked="false"
+                class="accent-amber-600"
+              />
+              <span class="text-gray-700">Interest Only</span>
+            </label>
+          </div>
 
-    <div  class="flex flex-col">
-    <!-- Interest Rate -->
-    <label class="block text-gray-700 text-start font-medium mb-1">Interest Rate</label>
-    <div class="flex gap-0 mb-3 items-end">
-      <input type="text" placeholder="5.25" id="Interest_rate"  onkeypress="press3()"
-        class="w-[10vw] px-3 py-2 border border-gray-400 outline-r-0 rounded-lg outline-gray-400 border-r-0  rounded-r-none">
-      <span id="just3" class="flex items-center  border-l-0  rounded-l-none px-3 py-2 border border-gray-400 rounded-lg text-gray-600 bg-teal-100">%</span>
-    </div>
-    <p id="e2"></p>
-    </div>
-  </div>
+          <!-- Button -->
+          <button
+            id="Calculate"
+            onclick="Calculate()"
+            class="mt-6 w-full flex items-center justify-center gap-2 bg-lime-300 hover:bg-lime-200 text-gray-900 font-semibold py-3 rounded-lg shadow transition"
+          >
+            <img src="images/icon-calculator.svg" alt="" />
+            Calculate Repayments
+          </button>
+        </div>
+      </div>
 
-    <!-- Mortgage Type -->
-    <label class="block text-gray-700 font-medium mb-2">Mortgage Type</label>
-    <div class="space-y-2">
-      <label class="flex items-center gap-2 p-3 border border-gray-300 rounded-lg cursor-pointer hover:border-amber-300 hover:bg-amber-100">
-        <input type="radio" name="mortgage-type"  aria-checked="true" class="accent-amber-600">
-        <span class="text-gray-700">Repayment</span>
-      </label>
-      <label class="flex items-center gap-2 p-3 border border-gray-300 rounded-lg cursor-pointer hover:border-amber-300 hover:bg-amber-100">
-        <input type="radio" name="mortgage-type" aria-checked=""  class="accent-amber-600">
-        <span class="text-gray-700">Interest Only</span>
-      </label>
-    </div>
+      <!-- RIGHT: Results (empty) -->
+      <div
+        id="empty"
+        class="w-full md:w-1/2 flex flex-col justify-center items-center bg-slate-900 rounded-bl-[40px] md:rounded-bl-[80px] rounded-r-2xl text-white p-6 mt-6 md:mt-0"
+      >
+        <div class="mb-6">
+          <img
+            src="images/illustration-empty.svg"
+            alt="Calculator Illustration"
+            class="w-32 md:w-40 h-auto"
+          />
+        </div>
 
-    <!-- Button -->
-    <button id="Calculate"  onclick="Calculate() "
-      class="mt-4 w-full cursor-pointer flex  items-center  gap-[10px] cu justify-center bg-lime-300  hover:bg-lime-200 text-gray-900 font-semibold py-3 rounded-lg shadow transition">
-      <img src="images/icon-calculator.svg" alt="">
-      Calculate Repayments
-    </button>
-  </div>
-  </div>
+        <!-- Text Content -->
+        <h2 class="text-base md:text-lg font-semibold mb-2 text-center">
+          Results shown here
+        </h2>
+        <p
+          class="text-sm text-slate-300 text-center max-w-xs md:max-w-sm leading-relaxed"
+        >
+          Complete the form and click
+          <span class="font-semibold">‘calculate repayments’</span> to see what
+          your monthly repayments would be.
+        </p>
+      </div>
 
-    <!-- RIGHT: Results -->
-    <div  id="empty" class="w-1/2 flex flex-col justify-center items-center bg-slate-900  rounded-bl-[80px] rounded-r-2xl text-white p-6 rounded-tr-2xl rounded-br-2xl">
-    <div class="mb-6">
-      <img src="images/illustration-empty.svg" alt="Calculator Illustration" class="w-40 h-auto">
-    </div>
+      <!-- RIGHT: Results (visible after calculation) -->
+      <div
+        id="result"
+        class="Result bg-[#0F2536] flex flex-col text-white p-6 rounded-bl-[40px] md:rounded-bl-[80px] rounded-r-2xl w-full md:w-1/2 mt-6 md:mt-0"
+      >
+        <h2 class="text-base md:text-lg font-semibold mb-2">Your results</h2>
+        <p class="text-sm text-gray-300 mb-6 leading-relaxed">
+          Your results are shown below based on the information you provided. To
+          adjust the results, edit the form and click
+          <span class="italic">“calculate repayments”</span> again.
+        </p>
 
-    <!-- Text Content -->
-    <h2 class="text-lg font-semibold mb-2">Results shown here</h2>
-    <p class="text-sm text-slate-300 text-center max-w-xs">
-      Complete the form and click <span class="font-semibold">‘calculate repayments’</span> to 
-      see what your monthly repayments would be.
-    </p>
-  </div>
+        <div
+          class="bg-[#132D44] p-5 rounded-xl border-t-4 border-yellow-400 text-center"
+        >
+          <p class="text-sm text-gray-300 mb-1">Your monthly repayments</p>
+          <h3
+            id="Monthly"
+            class="text-2xl md:text-3xl font-bold text-yellow-400 mb-4"
+          >
+            £1,797.74
+          </h3>
 
-  <div id="result" class="Result bg-[#0F2536] flex  flex-col text-white p-6 rounded-bl-[80px] rounded-r-2xl w-[350px]">
-      <h2 class="text-lg font-semibold mb-2">Your results</h2>
-      <p class="text-sm text-gray-300 mb-6">
-        Your results are shown below based on the information you provided.
-        To adjust the results, edit the form and click 
-        <span class="italic">“calculate repayments”</span> again.
-      </p>
-
-      <div class="bg-[#132D44] p-5 rounded-xl border-t-4 border-yellow-400">
-        <p class="text-sm text-gray-300 mb-1">Your monthly repayments</p>
-        <h3 id="Monthly" class="text-3xl font-bold text-yellow-400 mb-4">£1,797.74</h3>
-
-        <p class="text-sm text-gray-300">Total you’ll repay over the term</p>
-        <p class="text-xl font-semibold"  id="Repay">£539,322.94</p>
+          <p class="text-sm text-gray-300">
+            Total you’ll repay over the term
+          </p>
+          <p id="Repay" class="text-lg md:text-xl font-semibold">
+            £539,322.94
+          </p>
+        </div>
       </div>
     </div>
-    <!-- <div id="All_int" class="Result bg-[#0F2536] flex  flex-col text-white p-6 rounded-bl-[80px] rounded-r-2xl w-[350px]">
-      <p>Your Interest  is  <span id="interest"></span></p>
-    </div> -->
-  </div>
 
-  <script src="index.js"></script>
-</body>
+    <script src="index.js"></script>
+  </body>
 </html>

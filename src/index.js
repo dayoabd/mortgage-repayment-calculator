@@ -9,10 +9,6 @@ let mortageTerm = document.getElementById("Mortgage_Term");
 
 
 
-// function clearAll() {
-  
-
-// }
   function Calculate() {
     if (!mortageAmount.value) {
       let e00 = document.getElementById("e0") 
@@ -99,6 +95,24 @@ let mortageTerm = document.getElementById("Mortgage_Term");
 
   function Clear() {
     mortageAmount.value = ""
+    mortageAmount.style.borderColor = "#99a1af"
+    interestRate.style.borderColor = "#99a1af"
+    mortageTerm.style.borderColor = "#99a1af"
+    e00 = document.getElementById("e0")
+    e00.innerHTML = "This field is required......" ;
+    e00.style.display = "none"
+    e11 = document.getElementById("e1")
+    e11.innerHTML = "This field is required......" ;  
+    e11.style.display = "none"
+    e22 = document.getElementById("e2")
+    e22.innerHTML = "This field is required......" ;
+    e22.style.display = "none"
+    let p1 = document.getElementById("Mortgage_Amount").style.borderColor = "#99a1af"
+    let p5 = document.getElementById("Mortgage_Term").style.borderColor = "#99a1af"
+    let p6 = document.getElementById("Interest_rate").style.borderColor = "#99a1af"
+    let p2  = document.getElementById("just1").style.backgroundColor  = "#cbfbf1"
+    let p3  = document.getElementById("just2").style.backgroundColor  = "#cbfbf1"
+    let p4  = document.getElementById("just3").style.backgroundColor  = "#cbfbf1"
     interestRate.value = ""
     mortageTerm.value = ""
     empty.style.display = "flex"
